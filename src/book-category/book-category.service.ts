@@ -9,7 +9,7 @@ import { BookCategory } from './entities/book-category.entity';
 export class BookCategoryService implements OnModuleInit {
   constructor(
     @InjectRepository(BookCategory)
-    private readonly repo: Repository<BookCategory>, // ✅ เปลี่ยนชื่อเป็น repo
+    private readonly repo: Repository<BookCategory>, 
   ) {}
 
   async onModuleInit() {

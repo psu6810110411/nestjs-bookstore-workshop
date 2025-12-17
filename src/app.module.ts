@@ -12,8 +12,8 @@ import { BookCategory } from './book-category/entities/book-category.entity';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'chap1234', // 👈 ใส่รหัสที่คุณเพิ่งใช้ล็อกอิน pgAdmin ตรงนี้!
-      database: 'bookstore_db',  // ชื่อต้องตรงกับที่สร้างใน pgAdmin
+      password: 'chap1234', 
+      database: 'bookstore_db', 
       entities: [BookCategory],
       synchronize: true,
     }),

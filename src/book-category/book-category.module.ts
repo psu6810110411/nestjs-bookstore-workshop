@@ -6,10 +6,10 @@ import { BookCategoryController } from './book-category.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([BookCategory]) // ✅ ต้องมีบรรทัดนี้
+    TypeOrmModule.forFeature([BookCategory]) 
   ],
   controllers: [BookCategoryController],
   providers: [BookCategoryService], 
-  exports: [BookCategoryService] // optional
+  exports: [BookCategoryService]
 })
 export class BookCategoryModule {}
