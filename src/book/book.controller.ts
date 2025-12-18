@@ -8,10 +8,16 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @Post()
-  create(@Body() createBookDto: CreateBookDto) {
+  create(@Body() createBookDto: any) { // ใช้ any ชั่วคราวเพื่อความง่าย
     return this.bookService.create(createBookDto);
   }
-  
+
+  // 👇 Endpoint สำหรับกด Like
+  @Patch(':id/like')
+  async likeBook(@Param('id') id: string) {
+    return this.bookService.incrementLikes(id);
+  }
+
   @Get()
   findAll() {
     return this.bookService.findAll();
@@ -22,9 +28,14 @@ export class BookController {
     return this.bookService.findOne(id);
   }
 
-  @Patch(':id/like')
-  async likeBook(@Param('id') id: string) {
-    return this.bookService.incrementLikes(id);
+  // (ส่วน update/delete ปล่อยไว้แบบเดิมก็ได้ครับ)
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
+    return this.bookService.update(+id, updateBookDto);
   }
 
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.bookService.remove(+id);
+  }
 }

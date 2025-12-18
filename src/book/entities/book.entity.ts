@@ -18,6 +18,7 @@ export class Book {
   @Column({ default: 0 })
   likeCount: number;
 
+  // เชื่อมโยงกับ Category (หนังสือหลายเล่ม -> อยู่ใน 1 หมวดหมู่)
   @ManyToOne(() => BookCategory, (category) => category.id)
   category: BookCategory;
 

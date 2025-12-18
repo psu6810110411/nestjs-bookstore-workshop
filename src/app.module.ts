@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { BookCategoryModule } from './book-category/book-category.module';
 import { BookCategory } from './book-category/entities/book-category.entity';
 import { BookModule } from './book/book.module';
+import { Book } from './book/entities/book.entity';
 
 @Module({
   imports: [
@@ -12,10 +13,10 @@ import { BookModule } from './book/book.module';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',
-      password: 'chap1234', 
-      database: 'bookstore_db', 
-      entities: [BookCategory],
+      username: 'admin',
+      password: 'password123', 
+      database: 'bookstore_dev', 
+      entities: [BookCategory,Book],
       synchronize: true,
     }),
     BookCategoryModule,
