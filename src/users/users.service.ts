@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User, UserRole } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt'; // 👈 พระเอกของเรา
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -13,7 +13,7 @@ export class UsersService implements OnModuleInit {
     private userRepository: Repository<User>,
   ) {}
 
-  // 👇 ทำงานทันทีที่รัน Server: เช็คว่ามี Admin หรือยัง?
+  // ทำงานทันทีที่รัน Server: เช็คว่ามี Admin หรือยัง?
   async onModuleInit() {
     const admin = await this.findOneByEmail('admin@bookstore.com');
     if (!admin) {
