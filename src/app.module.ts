@@ -3,9 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BookCategoryModule } from './book-category/book-category.module';
-import { BookCategory } from './book-category/entities/book-category.entity';
 import { BookModule } from './book/book.module';
-import { Book } from './book/entities/book.entity';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,11 +16,16 @@ import { Book } from './book/entities/book.entity';
       username: 'admin',
       password: 'password123', 
       database: 'bookstore_dev', 
-      entities: [BookCategory,Book],
+      
+      // 👇 แก้ตรงนี้ครับ: ลบ entities [...] ทิ้ง แล้วใช้ autoLoadEntities แทน
+      autoLoadEntities: true, 
       synchronize: true,
+      dropSchema: true,
     }),
     BookCategoryModule,
     BookModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
