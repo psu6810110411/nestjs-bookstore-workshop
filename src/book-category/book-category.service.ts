@@ -32,12 +32,13 @@ export class BookCategoryService implements OnModuleInit {
   async findAll(): Promise<BookCategory[]> {
     return await this.repo.find({
       order: {
-        createdAt: 'DESC',
+        createdAt: 'DESC', // (ถ้า Entity ไม่มี field นี้อาจต้องลบออก หรือแก้ Entity เพิ่ม)
       },
     });
   }
 
-  async findOne(id: string): Promise<BookCategory> {
+  // 👇 แก้ string -> number
+  async findOne(id: number): Promise<BookCategory> {
     const category = await this.repo.findOneBy({ id });
     
     if (!category) {
@@ -47,13 +48,15 @@ export class BookCategoryService implements OnModuleInit {
     return category;
   }
 
-  async update(id: string, updateBookCategoryDto: UpdateBookCategoryDto): Promise<BookCategory> {
+  // 👇 แก้ string -> number
+  async update(id: number, updateBookCategoryDto: UpdateBookCategoryDto): Promise<BookCategory> {
     const category = await this.findOne(id);
     Object.assign(category, updateBookCategoryDto);
     return await this.repo.save(category);
   }
 
-  async remove(id: string): Promise<void> {
+  // 👇 แก้ string -> number
+  async remove(id: number): Promise<void> {
     const result = await this.repo.delete(id);
     
     if (result.affected === 0) {

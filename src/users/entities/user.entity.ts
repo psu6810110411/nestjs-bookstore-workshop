@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
+import { Book } from '../../book/entities/book.entity';
 
-// สร้าง enum สำหรับ Role
+// 👇 ประกาศ Enum ไว้ตรงนี้เลยครับ จะได้เรียกใช้ได้
 export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
+  ADMIN = 'admin',
+  USER = 'user',
 }
 
 @Entity()
@@ -11,14 +12,18 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true }) // อีเมลห้ามซ้ำ
+  @Column({ unique: true })
   email: string;
 
   @Column()
-  password: string; // เก็บแบบ Hash
+  password: string;
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole;
+
+  // 👇 ส่วนที่เพิ่มมาใหม่
+  @ManyToMany(() => Book, (book) => book.likedBy)
+  likedBooks: Book[];
 
   @CreateDateColumn()
   createdAt: Date;
